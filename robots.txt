@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rtech-solucionesinformtica.github.io/MyWeb-Soluciones-Inform-tica/sitemap.xml
