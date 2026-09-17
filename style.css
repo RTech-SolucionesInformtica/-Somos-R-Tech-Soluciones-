@@ -689,8 +689,9 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.08; font-weigh
   .nav__links { display: none; }
   .nav > .container .btn { display: none; }
   .nav__burger { display: flex; }
-  .hero__inner { grid-template-columns: 1fr; gap: 4rem; }
-  .hero__stage { order: -1; min-height: 300px; }
+  .hero { padding: 6.5rem 0 3rem; min-height: auto; }
+  .hero__inner { grid-template-columns: 1fr; gap: 2.2rem; }
+  .hero__stage { order: 1; min-height: 260px; }
   .timeline { grid-template-columns: 1fr 1fr; row-gap: 2.5rem; }
   .timeline::before { display: none; }
   .stats { grid-template-columns: 1fr 1fr; }
