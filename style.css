@@ -314,6 +314,10 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.08; font-weigh
   position: relative; width: min(440px, 90%); transform-style: preserve-3d;
   transform: rotateX(12deg) rotateY(-14deg); transition: transform .2s var(--ease);
   animation: floaty 6s ease-in-out infinite;
+  /* Fuerza a que el navegador mantenga esta capa 3D estable en la GPU:
+     evita que el contenido interno "desaparezca" un instante durante el scroll
+     en algunos navegadores móviles (Android Chrome/WebView). No cambia nada visual. */
+  -webkit-backface-visibility: hidden; backface-visibility: hidden;
 }
 @keyframes floaty { 0%,100% { translate: 0 0 } 50% { translate: 0 -14px } }
 
@@ -333,7 +337,11 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.08; font-weigh
   position: absolute; inset: 0; z-index: 4; pointer-events: none;
   background: linear-gradient(120deg, rgba(255,255,255,.08) 0%, transparent 40%);
 }
-.screen__ui { position: absolute; inset: 0; z-index: 2; padding: 12px 14px; font-family: var(--font-data); }
+.screen__ui {
+  position: absolute; inset: 0; z-index: 2; padding: 12px 14px; font-family: var(--font-data);
+  -webkit-transform: translateZ(0); transform: translateZ(0);
+  -webkit-backface-visibility: hidden; backface-visibility: hidden;
+}
 .ui__topbar { display: flex; align-items: center; gap: 6px; margin-bottom: 14px; }
 .ui__dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.25); }
 .ui__dot:first-child { background: var(--celeste); box-shadow: 0 0 8px var(--celeste); }
@@ -355,6 +363,7 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.08; font-weigh
   background: linear-gradient(180deg, #1a2230, #0a0d13);
   border-radius: 3px 3px 12px 12px; border: 1px solid var(--stroke); border-top: none;
   transform: rotateX(72deg); transform-origin: top; box-shadow: 0 30px 40px -10px rgba(0,0,0,.8);
+  -webkit-backface-visibility: hidden; backface-visibility: hidden;
 }
 .base__notch { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 70px; height: 4px; border-radius: 0 0 6px 6px; background: rgba(0,0,0,.5); }
 
