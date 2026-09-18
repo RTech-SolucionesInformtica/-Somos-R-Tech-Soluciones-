@@ -397,8 +397,10 @@
       const note = $("[data-form-note]", form);
       const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-      // Email que recibe las consultas
+      // Email que recibe las consultas (se usa como respaldo en el mensaje de confirmación)
       const EMAIL = "rtech.solucionesinformatica@gmail.com";
+      // WhatsApp del negocio (mismo número que el botón flotante de la página)
+      const WHATSAPP = "5493813399196";
 
       form.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -425,7 +427,6 @@
         };
 
         const intro = form.dataset.intro || "quiero solicitar un diagnóstico";
-        const asunto = `Consulta de ${datos.nombre} - ${intro}`;
         const cuerpo =
           `Hola R-TECH, ${intro}.\n\n` +
           `Nombre: ${datos.nombre}\n` +
@@ -433,11 +434,12 @@
           `Email: ${datos.email}\n` +
           `Consulta: ${datos.mensaje}`;
 
-        // Abrimos el cliente de correo con el mensaje ya escrito
-        window.location.href =
-          `mailto:${EMAIL}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
+        // Enviamos la consulta por WhatsApp (llega directo, sin depender de que el
+        // visitante tenga un cliente de correo configurado en el celular).
+        const waUrl = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(cuerpo)}`;
+        window.open(waUrl, "_blank", "noopener,noreferrer");
 
-        note.textContent = "Te abrimos tu correo con la consulta lista. Tocá enviar para que nos llegue.";
+        note.textContent = `Te abrimos WhatsApp con tu consulta lista para enviar. Si preferís, también podés escribirnos a ${EMAIL}.`;
         note.className = "form__note is-ok";
         form.reset();
       });
